@@ -27,4 +27,10 @@ def update(request,id):
     if form.is_valid():
         form.save()
         return redirect('/')
-    return render(request,'edit.html')
+    return render(request,'edit.html',{'form':form,'obj':obj})
+def delete(request,id):
+    if request.method=='POST':
+        obj=shop.objects.get(id=id)
+        obj.delete()
+        return redirect('/')
+    return render(request,'delete.html')
